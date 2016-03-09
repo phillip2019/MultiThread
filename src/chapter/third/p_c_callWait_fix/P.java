@@ -1,4 +1,4 @@
-package chapter.third.p_r_test;
+package chapter.third.p_c_callWait_fix;
 
 /**
  * Created by wuyan on 2016/3/9.
@@ -13,14 +13,13 @@ public class P {
     public void setValue(){
         try{
             synchronized (lock){
-                while( !ValueObject.value.equals("")){
-                    System.out.println("生产者 " + Thread.currentThread().getName() + " WAITING了★");
+                if( !ValueObject.value.equals("")){
                     lock.wait();
                 }
-                System.out.println("生产者 " + Thread.currentThread().getName() + " RUNNABLE了");
                 String value = System.currentTimeMillis() + "_" + System.nanoTime();
+                System.out.println("set的值是" + value);
                 ValueObject.value = value;
-                lock.notify();
+                lock.notifyAll();
             }
         }catch (InterruptedException e){
             e.printStackTrace();
