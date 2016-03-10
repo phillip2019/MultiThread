@@ -18,7 +18,7 @@ public class Service {
                 }
             }
         }else{
-            System.out.println("Thread B run Time=" + System.currentTimeMillis());
+            System.out.println("ThreadA B run Time=" + System.currentTimeMillis());
         }
     }
 }
