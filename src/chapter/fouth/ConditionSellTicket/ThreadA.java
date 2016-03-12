@@ -17,5 +17,6 @@ public class ThreadA extends Thread {
         for (int i = 0; i < 25; i++) {
             seller.aSell();
         }
+//        seller.aSell();
     }
 }

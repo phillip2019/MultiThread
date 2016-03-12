@@ -16,5 +16,6 @@ public class ThreadD extends Thread {
         for (int i = 0; i < 25; i++) {
             seller.dSell();
         }
+//        seller.dSell();
     }
 }

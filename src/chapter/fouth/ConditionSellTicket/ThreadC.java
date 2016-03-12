@@ -16,5 +16,6 @@ public class ThreadC extends Thread {
         for (int i = 0; i < 25; i++) {
             seller.cSell();
         }
+//        seller.cSell();
     }
 }

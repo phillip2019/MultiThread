@@ -11,7 +11,7 @@ public class SellerTicket{
     volatile public static int nextThread = 1;      //1:A, 2:B, 3:C, 4D
     private Ticket ticket;
     private ReentrantLock lock = new ReentrantLock();
-    private Condition conditionA = lock.newCondition();
+    private Condition condition = lock.newCondition();
     private Condition conditionB = lock.newCondition();
     private Condition conditionC = lock.newCondition();
     private Condition conditionD = lock.newCondition();
@@ -24,13 +24,13 @@ public class SellerTicket{
         try {
             lock.lock();
             while (F.nextThread != 1) {
-                System.out.println("A nextThread=" + F.nextThread);
-                conditionA.await();
+//                System.out.println("A nextThread=" + F.nextThread);
+                condition.await();
             }
             ticket.sell();
             System.out.println("Thread " + Thread.currentThread().getName() + ":" + ticket.getTicketNum());
             F.nextThread = 2;
-            conditionA.signalAll();
+            condition.signalAll();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
@@ -42,13 +42,13 @@ public class SellerTicket{
         try {
             lock.lock();
             while (F.nextThread != 2) {
-                System.out.println("B nextThread=" + F.nextThread);
-                conditionB.await();
+//                System.out.println("B nextThread=" + F.nextThread);
+                condition.await();
             }
             ticket.sell();
             System.out.println("Thread " + Thread.currentThread().getName() + ":" + ticket.getTicketNum());
             F.nextThread = 3;
-            conditionB.signalAll();
+            condition.signalAll();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
@@ -60,13 +60,13 @@ public class SellerTicket{
         try {
             lock.lock();
             while (F.nextThread != 3) {
-                System.out.println("C nextThread=" + F.nextThread);
-                conditionC.await();
+//                System.out.println("C nextThread=" + F.nextThread);
+                condition.await();
             }
             ticket.sell();
             System.out.println("Thread " + Thread.currentThread().getName() + ":" + ticket.getTicketNum());
             F.nextThread = 4;
-            conditionC.signalAll();
+            condition.signalAll();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
@@ -78,13 +78,13 @@ public class SellerTicket{
         try {
             lock.lock();
             while (F.nextThread != 4) {
-                System.out.println("D nextThread=" + F.nextThread);
-                conditionD.await();
+//                System.out.println("D nextThread=" + F.nextThread);
+                condition.await();
             }
             ticket.sell();
             System.out.println("Thread " + Thread.currentThread().getName() + ":" + ticket.getTicketNum());
             F.nextThread = 1;
-            conditionD.signalAll();
+            condition.signalAll();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
