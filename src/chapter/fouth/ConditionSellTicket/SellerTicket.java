@@ -12,9 +12,6 @@ public class SellerTicket{
     private Ticket ticket;
     private ReentrantLock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();
-    private Condition conditionB = lock.newCondition();
-    private Condition conditionC = lock.newCondition();
-    private Condition conditionD = lock.newCondition();
 
     public SellerTicket(Ticket ticket) {
         this.ticket = ticket;
